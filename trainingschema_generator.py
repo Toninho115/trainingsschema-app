@@ -141,4 +141,3 @@ with st.form("oefening_form"):
         with open(DATA_FILE, "w") as f:
             json.dump(oefeningen_db, f, indent=2)
         st.success(f"Oefening {nieuwe_id} toegevoegd!")
-<gebruik de huidige code uit het canvas hier>
