@@ -72,7 +72,6 @@ def genereer_pdf(schema):
             pdf.cell(200, 8, txt=oef['training'], ln=True)
             pdf.set_font("Arial", size=11)
             pdf.multi_cell(0, 8, txt=f"Instructie: {oef['instructie']}\nMateriaal: {oef['materiaal']}\nDuur: {oef['duur']} minuten")
-            # Voeg afbeelding toe
             try:
                 response = requests.get(oef['afbeelding'])
                 if response.status_code == 200:
@@ -93,7 +92,7 @@ st.title("Dynamische Trainingsschema Generator")
 
 st.header("Trainingsparameters")
 sport = st.selectbox("Kies sport", ["hockey", "voetbal"])
-leeftijd = st.selectbox("Kies leeftijdscategorie", ["U10", "U12"])
+leeftijd = st.selectbox("Kies leeftijdscategorie", ["U8", "U9", "U10", "U12"])
 aantal_trainingen = st.slider("Aantal trainingen per week", 1, 5, 2)
 aantal_oefeningen = st.slider("Aantal oefeningen per training", 1, 5, 2)
 tijd_per_oef = st.slider("Tijd per oefening (min)", 5, 20, 10)
@@ -119,7 +118,7 @@ st.header("Voeg een nieuwe oefening toe")
 with st.form("oefening_form"):
     nieuwe_id = max([o["id"] for o in oefeningen_db]) + 1 if oefeningen_db else 1
     nieuwe_sport = st.selectbox("Sport", ["hockey", "voetbal"], key="sport")
-    nieuwe_leeftijd = st.selectbox("Leeftijdscategorie", ["U10", "U12"], key="leeftijd")
+    nieuwe_leeftijd = st.selectbox("Leeftijdscategorie", ["U8", "U9", "U10", "U12"], key="leeftijd")
     nieuwe_categorie = st.text_input("Categorie (bv. techniek, conditie)")
     nieuwe_instructie = st.text_area("Instructie")
     nieuwe_materiaal = st.text_area("Materiaal")
